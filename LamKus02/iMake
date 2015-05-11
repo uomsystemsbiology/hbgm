@@ -1,0 +1,19 @@
+#! /bin/bash
+
+syss="CrAMP GLY2FBP FBP2GAP GAP2LAC GLY2LAC LamKus02"
+
+for sys in $syss; do
+    isys=i$sys
+    echo Doing $isys
+## Latex & eps stuff
+    # mtt -q  ${isys} abg eps
+    # mv -v ${isys}*eps Figs
+
+## Stoichiometric stuff
+    reps="dm numpar sympar struc"
+    for rep in $reps; do
+    	echo Doing $rep
+    	mtt -dc -q  $isys $rep m
+    done
+
+done

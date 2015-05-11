@@ -1,0 +1,226 @@
+
+%file: lamkus02_{dae}.tex
+%differential-algebraic equations
+\begin{equation}
+\begin{aligned}
+\dot x_{1} &=
+{
+2 u_{1} - u_{10} - u_{11} + u_{16} + u_{17} + u_{2}
+}
+\cr
+\dot x_{2} &=
+{
+ - u_{1}
+}
+\cr
+\dot x_{3} &=
+{
+ - u_{1} + u_{10} + u_{11} - u_{16} - u_{17} - u_{2}
+}
+\cr
+\dot x_{4} &=
+{
+ - u_{2}
+}
+\cr
+\dot x_{5} &=
+{
+ - u_{12} - u_{13} + u_{17} - u_{8}
+}
+\cr
+\dot x_{6} &=
+{
+u_{2}
+}
+\cr
+\dot x_{7} &=
+{
+u_{3} + u_{4}
+}
+\cr
+\dot x_{8} &=
+{
+u_{16} - u_{3}
+}
+\cr
+\dot x_{9} &=
+{
+u_{3} - u_{4} - u_{8}
+}
+\cr
+\dot x_{10} &=
+{
+ - u_{10} + u_{8}
+}
+\cr
+\dot x_{11} &=
+{
+ - u_{6} + u_{9}
+}
+\cr
+\dot x_{12} &=
+{
+u_{6}
+}
+\cr
+\dot x_{13} &=
+{
+ - u_{8} + u_{9}
+}
+\cr
+\dot x_{14} &=
+{
+u_{8} - u_{9}
+}
+\cr
+\dot x_{15} &=
+{
+ - u_{5} + u_{7}
+}
+\cr
+\dot x_{16} &=
+{
+u_{10} - u_{7}
+}
+\cr
+\dot x_{17} &=
+{
+ - u_{11} + u_{5}
+}
+\cr
+\dot x_{18} &=
+{
+u_{11} - u_{9}
+}
+\cr
+\dot x_{19} &=
+{
+u_{14} - u_{16}
+}
+\cr
+\dot x_{20} &=
+{
+u_{12} + u_{13} - u_{15}
+}
+\cr
+\dot x_{21} &=
+{
+ - u_{14} + u_{15}
+}
+\cr
+\dot x_{22} &=
+{
+0
+}
+\end{aligned}
+\end{equation}
+\begin{equation}
+\begin{aligned}
+y_{1} &=
+{
+{\left (v_{adk} {\left ( - k_{adp}^2 x_{1}^2 + k_{amp} k_{atp} x_{2} x_{3}\right )}\right )} \over {\left (k_{adk} + k_{adp}^2 x_{1}
+^2 \rho_{adk} - k_{amp} k_{atp} x_{2} x_{3} \rho_{adk} + k_{amp} k_{atp} x_{2} x_{3}\right )}
+}
+\cr
+y_{2} &=
+{
+{\left (v_{ck} {\left ( - k_{adp} k_{pcr} x_{1} x_{6} + k_{atp} k_{cr} x_{3} x_{4}\right )}\right )} \over {\left (k_{adp} k_{pcr} x_{1}
+x_{6} \rho_{ck} - k_{atp} k_{cr} x_{3} x_{4} \rho_{ck} + k_{atp} k_{cr} x_{3} x_{4} + k_{ck}\right )}
+}
+\cr
+y_{3} &=
+{
+{\left (v_{ald} {\left ( - k_{dhap} k_{gap} x_{7} x_{9} + k_{fbp} x_{8}\right )}\right )} \over {\left (k_{ald} + k_{dhap} k_{gap} x_{7}
+x_{9} \rho_{ald} - k_{fbp} x_{8} \rho_{ald} + k_{fbp} x_{8}\right )}
+}
+\cr
+y_{4} &=
+{
+{\left (v_{t\pi} {\left ( - k_{dhap} x_{7} + k_{gap} x_{9}\right )}\right )} \over {\left (k_{dhap} x_{7} \rho_{t\pi} - k_{gap} x_{9}
+\rho_{t\pi} + k_{gap} x_{9} + k_{t\pi}\right )}
+}
+\cr
+y_{5} &=
+{
+{\left (v_{eno} {\left (k_{p2g} x_{15} - k_{pep} x_{17}\right )}\right )} \over {\left (k_{eno} - k_{p2g} x_{15} \rho_{eno} + k_{p2g}
+x_{15} + k_{pep} x_{17} \rho_{eno}\right )}
+}
+\cr
+y_{6} &=
+{
+{\left (v_{fout} {\left (k_{lac} x_{11} - k_{laco} x_{12}\right )}\right )} \over {\left (k_{fout} - k_{lac} x_{11} \rho_{fout} + k_{lac}
+x_{11} + k_{laco} x_{12} \rho_{fout}\right )}
+}
+\cr
+y_{7} &=
+{
+{\left (v_{pgm} {\left ( - k_{p2g} x_{15} + k_{p3g} x_{16}\right )}\right )} \over {\left (k_{p2g} x_{15} \rho_{pgm} - k_{p3g} x_{16}
+\rho_{pgm} + k_{p3g} x_{16} + k_{pgm}\right )}
+}
+\cr
+y_{8} &=
+{
+{\left (v_{gapdh} {\left ( - k_{dpg} k_{nadh} x_{10} x_{14} + k_{gap} k_{nad} k_{p} x_{13} x_{5} x_{9}\right )}\right )} \over {\left (
+k_{dpg} k_{nadh} x_{10} x_{14} \rho_{gapdh} - k_{gap} k_{nad} k_{p} x_{13} x_{5} x_{9}
+\rho_{gapdh} + k_{gap} k_{nad} k_{p} x_{13} x_{5} x_{9} + k_{gapdh}\right )}
+}
+\cr
+y_{9} &=
+{
+{\left (v_{ldh} {\left ( - k_{lac} k_{nad} x_{11} x_{13} + k_{nadh} k_{pyr} x_{14} x_{18}\right )}\right )} \over {\left (k_{lac} k_{nad}
+ x_{11} x_{13} \rho_{ldh} + k_{ldh} - k_{nadh} k_{pyr} x_{14} x_{18} \rho_{ldh} + k_{nadh}
+k_{pyr} x_{14} x_{18}\right )}
+}
+\cr
+y_{10} &=
+{
+{\left (v_{pgk} {\left ( - k_{adp} k_{dpg} x_{1} x_{10} + k_{atp} k_{p3g} x_{16} x_{3}\right )}\right )} \over {\left (k_{adp} k_{dpg}
+x_{1} x_{10} \rho_{pgk} - k_{adp} k_{dpg} x_{1} x_{10} - k_{atp} k_{p3g} x_{16} x_{3}
+\rho_{pgk} - k_{pgk}\right )}
+}
+\cr
+y_{11} &=
+{
+{\left (v_{pk} {\left ( - k_{adp} k_{pep} x_{1} x_{17} + k_{atp} k_{pyr} x_{18} x_{3}\right )}\right )} \over {\left (k_{adp} k_{pep}
+x_{1} x_{17} \rho_{pk} - k_{adp} k_{pep} x_{1} x_{17} - k_{atp} k_{pyr} x_{18} x_{3} \rho_{pk}
+ - k_{pk}\right )}
+}
+\cr
+y_{12} &=
+{
+{\left (k_{gly} x_{22} v_{gpa} {\left ( - k_{g1p} x_{20} + k_{p} x_{5}\right )}\right )} \over {\left (k_{g1p} k_{gly} x_{20} x_{22}
+\rho_{gpa} - k_{gly} k_{p} x_{22} x_{5} \rho_{gpa} + k_{gly} k_{p} x_{22} x_{5} + k_{gpa}\right )}
+}
+\cr
+y_{13} &=
+{
+{\left (k_{gly} x_{22} v_{gpb} {\left ( - k_{g1p} x_{20} + k_{p} x_{5}\right )}\right )} \over {\left (k_{g1p} k_{gly} x_{20} x_{22}
+\rho_{gpb} - k_{gly} k_{p} x_{22} x_{5} \rho_{gpb} + k_{gly} k_{p} x_{22} x_{5} + k_{gpb}\right )}
+}
+\cr
+y_{14} &=
+{
+{\left (v_{pgi} {\left ( - k_{f6p} x_{19} + k_{g6p} x_{21}\right )}\right )} \over {\left (k_{f6p} x_{19} \rho_{pgi} - k_{g6p} x_{21}
+\rho_{pgi} + k_{g6p} x_{21} + k_{pgi}\right )}
+}
+\cr
+y_{15} &=
+{
+{\left (v_{pglm} {\left ( - k_{g1p} x_{20} + k_{g6p} x_{21}\right )}\right )} \over {\left (k_{g1p} x_{20} \rho_{pglm} - k_{g1p} x_{20}
+- k_{g6p} x_{21} \rho_{pglm} - k_{pglm}\right )}
+}
+\cr
+y_{16} &=
+{
+{\left (v_{pfk} {\left ( - k_{adp} k_{fbp} x_{1} x_{8} + k_{atp} k_{f6p} x_{19} x_{3}\right )}\right )} \over {\left (k_{adp} k_{fbp}
+x_{1} x_{8} \rho_{pfk} - k_{atp} k_{f6p} x_{19} x_{3} \rho_{pfk} + k_{atp} k_{f6p} x_{19}
+x_{3} + k_{pfk}\right )}
+}
+\cr
+y_{17} &=
+{
+{\left (v_{atpase} {\left ( - k_{adp} k_{p} x_{1} x_{5} + k_{atp} x_{3}\right )}\right )} \over {\left (k_{adp} k_{p} x_{1} x_{5}
+\rho_{atpase} - k_{atp} x_{3} \rho_{atpase} + k_{atp} x_{3} + k_{atpase}\right )}
+}
+\end{aligned}
+\end{equation}

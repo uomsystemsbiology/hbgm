@@ -1,0 +1,450 @@
+\documentclass[12pt, a4paper]{article}
+
+%% Change indent
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=*}
+\setlist[enumerate]{leftmargin=*}
+\setlist[description]{leftmargin=*}
+
+%Maths
+\usepackage{amsmath,amssymb,amsbsy,amscd,amstext,mathtools,amsxtra}
+\setlength{\abovedisplayskip}{0pt}
+\setlength{\belowdisplayskip}{0pt}
+\setlength{\abovedisplayshortskip}{0pt}
+\setlength{\belowdisplayshortskip}{0pt}
+
+\newcommand{\lb}{\left (}
+\newcommand{\rb}{\right )}
+\newcommand{\diag}{\text{diag }}
+\newcommand{\Ln}{\text{\bf Ln }}
+\newcommand{\Exp}{\text{\bf Exp }}
+\newcommand{\vv}{\boldsymbol{v}}
+\renewcommand{\AA}{\boldsymbol{A}}
+\newcommand{\BB}{\boldsymbol{B}}
+\newcommand{\CC}{\boldsymbol{C}}
+\newcommand{\DD}{\boldsymbol{D}}
+\newcommand{\GG}{\boldsymbol{G}}
+\newcommand{\AAA}{\boldsymbol{a}}
+\newcommand{\BBB}{\boldsymbol{b}}
+\newcommand{\CCC}{\boldsymbol{c}}
+\newcommand{\DDD}{\boldsymbol{d}}
+\newcommand{\GGG}{\boldsymbol{g}}
+\newcommand{\KK}{\boldsymbol{K}}
+\newcommand{\kk}{\boldsymbol{k}}
+\newcommand{\KKb}{\bar{\KK}}
+\newcommand{\Xb}{\bar{X}}
+\newcommand{\Nb}{\bar{N}}
+\newcommand{\kkappa}{\boldsymbol{\kappa}}
+\newcommand{\mmu}{\boldsymbol{\mu}}
+\newcommand{\bX}{\bar{X}}
+\newcommand{\bN}{\bar{N}}
+\newcommand{\bA}{\bar{A}}
+\newcommand{\bvv}{\bar{\vv}}
+\newcommand{\bKK}{\bar{\KK}}
+\newcommand{\tKK}{\tilde{\KK}}
+\newcommand{\bkkappa}{\bar{\kkappa}}
+\newcommand{\bT}{\bar{T}}
+\newcommand{\bTK}{{\bar{T}_K}}
+\newcommand{\II}{\boldsymbol{I}}
+
+\newcommand{\Nfb}{{\bar{N^f}}}
+\newcommand{\Nrb}{{\bar{N^r}}}
+\newcommand{\Nf}{{N^f}}
+\newcommand{\Nr}{{N^r}}
+\newcommand{\Ne}{{N^e}}
+\newcommand{\Nef}{{N^{ef}}}
+\newcommand{\Ner}{{N^{er}}}
+\newcommand{\Ni}{{N^i}}
+\newcommand{\Ae}{{A^e}}
+\newcommand{\Ar}{{A^r}}
+
+\newcommand{\tX}{\tilde{X}}
+\newcommand{\dX}{{\dot{X}}}
+\newcommand{\dx}{{\dot{x}}}
+
+\newcommand{\hp}{\circ}         %Hadamard or Schur product.
+\newcommand{\half}{\frac{1}{2}}  
+
+\newcommand{\vbond}{{\Huge $\rightharpoondown$}}
+\newcommand{\RT}{RT}
+
+\newcommand{\xx}{\chi}
+\newcommand{\xt}{\tilde{x}}
+\newcommand{\Xt}{\tilde{X}}
+\newcommand{\xxt}{\tilde{\xx}}
+\newcommand{\yt}{\tilde{y}}
+\newcommand{\ut}{\tilde{u}}
+
+\renewcommand{\ss}[1]{\bar{#1}}
+
+\newcommand{\bK}{K^M}
+
+
+\newcommand{\Ass}{\bar{A}} 
+\newcommand{\FF}{\boldsymbol{F}}
+
+\newcommand{\Vt}{{\tilde{V}}}
+
+
+\newcommand{\reacul}[2]{
+  {\; \xrightleftharpoons[#2]{#1} \;}
+}
+
+\newcommand{\reacu}[1]{
+  \reacul{#1}{}
+}
+
+\newcommand{\reac}{
+  \reacu{}
+}
+
+
+%% Bond-Graph commands
+%%\usepackage{BG}
+%% Bond-Graph commands
+\newcommand{\BG}[1]{\text{\sffamily\textbf{#1}}}
+\newcommand{\AmpE}{\BG{AE }}
+\newcommand{\AF}{\BG{AF }}
+\newcommand{\C}{\BG{C }}
+\newcommand{\CS}{\BG{CS }}
+\newcommand{\CSW}{\BG{CSW }}
+\newcommand{\CSWw}{\BG{CSW}}
+\newcommand{\De}{\BG{De }}
+\newcommand{\Df}{\BG{Df }}
+\newcommand{\I}{\BG{I }}
+\newcommand{\INTF}{\BG{INTF }}
+\newcommand{\ISW}{\BG{ISW}}
+\newcommand{\R}{\BG{R }}
+\newcommand{\Se}{\BG{Se }}
+\newcommand{\See}{\BG{Se}}
+\newcommand{\Sf}{\BG{Sf }}
+\newcommand{\Sff}{\BG{Sf}}
+\newcommand{\Sv}{\BG{Sv}}
+\renewcommand{\SS}{\BG{SS }}
+\newcommand{\one}{\BG{1 }}
+\newcommand{\zero}{\BG{0 }}
+\newcommand{\One}{\BG{1}}
+\newcommand{\Zero}{\BG{0}}
+\newcommand{\zeroo}{\BG{0 }}
+\newcommand{\TF}{\BG{TF }}
+\newcommand{\GY}{\BG{GY }}
+
+\renewcommand{\Re}{\BG{Re }}
+\newcommand{\mRe}{\BG{mRe }}
+\newcommand{\sRe}{\BG{sRe }}
+\newcommand{\iRe}{\BG{iRe }}
+\newcommand{\Rr}{\BG{Rr }}
+\newcommand{\Rrr}{\BG{Rr2 }}
+
+%% Bond-Graph components with label
+\newcommand{\BGL}[2]{$\BG{#1}$:$\mathbf{#2}$} %Generic
+
+\newcommand{\BC}[1]{\BGL{C}{#1}}
+\newcommand{\BCS}[1]{\BGL{CS}{#1}}
+\newcommand{\BI}[1]{\BGL{I}{#1}}
+\newcommand{\BR}[1]{\BGL{R}{#1}}
+
+\newcommand{\BSS}[1]{\BGL{SS}{#1}}
+\newcommand{\BSe}[1]{\BGL{Se}{#1}}
+\newcommand{\BSf}[1]{\BGL{Sf}{#1}}
+\newcommand{\BSv}[1]{\BGL{Sv}{#1}}
+\newcommand{\BDe}[1]{\BGL{De}{#1}}
+\newcommand{\BDf}[1]{\BGL{Df}{#1}}
+
+\newcommand{\BTF}[1]{\BGL{TF}{#1}}
+\newcommand{\BGLY}[1]{\BGL{GY}{#1}}
+
+\newcommand{\BRe}[1]{\BGL{Re}{#1}}
+\newcommand{\BmRe}[1]{\BGL{mRe}{#1}}
+\newcommand{\BsRe}[1]{\BGL{sRe}{#1}}
+\newcommand{\BiRe}[1]{\BGL{iRe}{#1}}
+% Figs
+\usepackage{graphicx,subfigure,fancybox,color}
+
+\newcommand{\Fig}[2]{
+ \includegraphics[width=#2\linewidth]{Figs/#1.pdf}
+}
+
+\newcommand{\RotFig}[2]{
+ \includegraphics[width=#2\linewidth,angle=90,origin=c]{Figs/#1.pdf}
+}
+
+\newcommand{\SubFig}[3]{
+ \subfigure[#2]{
+   \includegraphics[width=#3\linewidth]{Figs/#1.pdf}
+   \label{subfig:#1}
+ }
+}
+
+\newcommand{\SubPic}[3]{
+ \subfigure[#2]{
+   \resizebox{#3\linewidth}{!}{\input{Pics/#1}}
+   \label{subfig:#1}
+ }
+}
+
+\newcommand{\SubFreq}[2]{
+  \SubFig{ABCA_lin_bode_#1#2}{$\GG_{#1#2}(\omega)$}{0.3}
+}
+
+\newcommand{\SubStep}[2]{
+  \SubFig{ABCA_lin_step_#1#2}{$\GGG_{#1#2}(t)$}{0.3}
+}
+
+\newcommand{\Pic}[2]{
+  \resizebox{#2\linewidth}{!}{\input{Pics/#1}}
+ }
+
+\newcommand{\SubModel}[2]{
+\begin{figure}[htbp]
+  \centering
+  \Fig{#1_abg}{#2}
+  \caption{Submodel: \Bg{#1}}
+  \label{fig:#1}
+\end{figure}
+}
+
+% %% XYpic diagrams
+% \usepackage[all,pdftex]{xy}
+% %%\usepackage[all]{xy}
+% \usepackage{array}
+% \usepackage{color}
+% \input{BG_pic}
+
+%% Irreversible reaction
+\newcommand{\ire}[2]{
+\ar@^{>}@<0.3ex>[#1]^{#2}
+}
+
+%% Bond-Graph commands
+\newcommand{\Bg}[1]{\text{\sffamily\textbf{#1}}}
+
+%% Links
+% \usepackage[pagebackref]{hyperref}
+% \hypersetup{colorlinks=true,citecolor=blue,linkcolor=blue,urlcolor=blue}
+%\usepackage{doi}
+
+%%\usepackage{endfloat}
+
+\begin{document}
+\title{Hierarchical Bond Graph Modelling of Biochemical Networks:
+  Figures and auto-generated equations.}
+
+\maketitle
+
+\section{Auto-generated equations.}
+\input{Tex/LamKus02_dae}
+
+\section{Figures}
+
+\begin{figure}[htbp]
+  \centering 
+  \SubFig{ABCAo_abg}{Example: external efforts  $\mu_F$ and $\mu_R$.}{0.45}
+  \SubFig{ABCAv_abg}{Example: external flow $v_e$}{0.45}
+  \SubFig{Open_abg}{General}{0.9}
+  \caption{Closed \& open systems. (a) \& (b) Simple examples corresponding
+    to reaction schemes () and ()  with
+    imposed concentrations and flows, respectively.
+    % 
+    The \Bg{C:A}, \Bg{C:B}, and \Bg{C:C} components accumulate the
+    species $A$, $B$ and $C$; and the \Bg{Re:r1}, \Bg{Re:r2} and
+    \Bg{Re:r3} represent reactions 1, 2 and 3. The \Bg{SS:[F]},
+    \Bg{SS:[R]} and \Bg{SS:[v\_e]}
+    components are the energy ports converting a closed system to an open one.
+    % 
+    The system inside the dashed box is a closed system; when
+    \Bg{SS} components (representing energy ports) are added the
+    system becomes open. (c) General case. The
+    bond symbols
+    $\rightharpoondown$ correspond to \emph{vectors} of bonds; 
+    $\mathcal{C}$, $\mathcal{R}e$, $\mathcal{SS}$, \zero and \one
+    symbols correspond to arrays of the associated components; and 
+    $\mathcal{TF}$ components represent the intervening
+    junction structure which transmits energy, comprising bonds, junctions
+    and \TF components. $\mathcal{SS}:[\mu_e]$ represents a vector of
+    energy ports imposing external chemical potentials;
+    $\mathcal{SS}:[v_E]$ represents a vector of energy ports imposing
+    external flows. In particular, with respect to (a) \& (b),
+    % 
+    $\mathcal{C}$ corresponds to the species represented by \Bg{C:A},
+    \Bg{C:B}, and \Bg{C:C},
+    % 
+    $\mathcal{R}e$ corresponds to the reactions represented by \Bg{Re:r1}, \Bg{Re:r2} and
+    \Bg{Re:r3} and
+    % 
+    $\mathcal{TF}:N^f_i$ and $\mathcal{TF}:N^r_i$ summarise the
+    connections between reactions and species. 
+    % 
+    With respect to (a), $\mathcal{SS}:[\mu_e]$ corresponds to \Bg{SS:[F]},
+    \Bg{SS:[R]}; with respect to (b), $\mathcal{SS}:[v_E]$ corresponds
+    to \Bg{SS:[v\_e]}. 
+%
+    $\mathcal{TF}:N^f_e$ and $\mathcal{TF}:N^r_e$ summarise the
+    connections between reactions and ports, and $\mathcal{TF}:N_E$
+    between species and ports, in (a) \& (b).  }
+ \label{fig:closed-open-systems}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \SubFig{ABCA_sim_v}{Closed system: $V$}{0.45}
+  \SubFig{ABCAo_sim_v}{Open system: $V$}{0.45}
+  \SubFig{ABCA_sim_x}{Closed system: $X$}{0.45}
+  \SubFig{ABCAo_sim_x}{Open system: $X$}{0.45}
+  \caption{Simulation of closed \& open systems. The parameters are:
+    $K_a=K_b=1$, $K_c=K_f =2$, $K_r=0.25$, $X_f=X_r=1$, $\kappa_1=1$,
+    $\kappa_2=2$ \& $\kappa_3=3$.
+    % 
+    (a) As this is a
+    closed system, the three reaction flows $v_1$--$v_3$ become zero
+    as time increases.
+    % 
+    (b) As this is an open system, the three reaction flows
+    $v_1$--$v_3$ do not become zero as the system has an external
+    driver. However, as the states become constant, the three flows
+    become equal.  
+    % 
+    (c) Although the closed system flows become zero the states do not, 
+    as the system has a conserved moiety: the three states have a 
+    constant sum $x_a+x_b+x_c=4$.
+    % 
+    (d) The three states tend to different values to those in (c); but
+    the moiety is still conserved.  }
+  \label{fig:sim_ABCAo}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \SubFig{ABCA_sim_P}{Closed system}{0.45}
+  \SubFig{ABCAo_sim_P}{Open system}{0.45}
+  \caption{Energy flows for the system illustrated in Figure () and simulated in Figure ():
+    $P_E$ is the external energy flowing into the system, 
+    $P_C$ is the energy flowing into the three \C
+    components, and $P_R$ is the energy flowing into (and dissipated by)
+    the three \Re components.
+    % 
+    (a) There is no external energy source in the closed system so
+    $P_E=0$. Conservation of energy gives $P_C+P_R=0$: the energy
+    flowing out of the \C components is dissipated in the \Re components.
+    % 
+    (b) There is an external energy source in the open system with
+    $\mu_e = RT \Ln K_e$. Initially, energy flows out of the the open
+    system but, in the steady state, the energy into the system is
+    balanced by the energy dissipated in the \Re components and the
+    energy flow into the \C components becomes zero.  }
+  \label{fig:energy}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \Fig{glycolysis_pathway}{0.9}
+\caption{The simplified glycolytic pathway as described by Lambeth \& Kushmerick. 
+  \textbf{Reactions/enzymes:} GP, glycogen phosphorylase; PGM, phosphoglucomutase; PGI, 
+  phosphoglucose isomerase; PFK, phosphofructo kinase; ALD, aldolase; TPI, 
+  triose phosphate isomerase; GAPDH, glyceraldehyde 3-phosphate dehydrogenase;
+  PGK, phosphoglycerate kinase; PGM, phosphoglycerate mutase; ENO, enolase; 
+  PK, pyruvate kinase; LDH, lactate dehydrogenase; CK, creatine kinase; AK, 
+  adenylate kinase; ATPase, ATPases. \textbf{Metabolites:} GLY, glycogen;
+  P$_{i}$, inorganic phosphate; G1P, glucose-1-phosphate; G6P, glucose-6-phosphate;
+  F6P, fructose-6-phosphate; ATP, adenosine triphosphate; ADP, adenosine diphosphate;
+  FBP, fructose-1,6-biphosphate; DHAP, dihydroxyacetone phosphate; GAP, 
+  glyceraldehyde 3-phosphate; NAD, oxidised nicotinamide adenine dinucleotide; NADH, 
+  reduced NAD; 13BPG, 1,3-bisphosphoglycerate; 3PG, 3-phosphoglycerate; 2PG, 
+  2-phosphoglycerate; PEP, phosphoenolpyruvic acid; PYR, pyruvate; LAC, lactate;
+  PCr, phosphocreatine; Cr, creatine; AMP, adenosine monophosphate. Enzyme 
+  commission (EC) numbers are shown.}
+  \label{fig:LamKus02}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \SubFig{LamKus02_abg}{\textbf{LamKus02}}{0.45}
+  \SubFig{GLY2LAC_abg}{\textbf{GLY2LAC}}{0.45}
+  \SubFig{GLY2FBP_abg}{\textbf{GLY2FBP}}{0.9}
+  \SubFig{FBP2GAP_abg}{\textbf{FBP2GAP}}{0.45}
+  \SubFig{GP_abg}{\textbf{GP}}{0.45}
+%%  \SubFig{Rea_abg}{Active reaction}{0.45}
+  \caption{Hierarchical Bond Graph Model. (a) As discussed in the
+    text, \textbf{LamKus02} represents the top-level model of the
+    system in Figure \ref{fig:LamKus02}. (b) \textbf{GLY2LAC}
+    represents one of the three submodels in (a). (c)\&(d)
+    \textbf{GLY2FBP}\&\textbf{FBP2GAP} represent two of the three
+    submodels in (b). (e) The reaction $GP$ has two parallel reactions
+    $GPa$ and $GPb$.}
+  \label{fig:BG}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+  \SubFig{LamKus02-0_Xeq}{Closed system}{0.45}
+  \SubFig{LamKus02-4_Xeq}{Open system}{0.45}
+  \caption{Simulation: equilibria. For each reaction, the ratio
+    $\Vt_0 = K^{v} \hp X^{v}$  () of the forward to backward reaction
+    flows, is plotted. (a) Closed system: each ratio tends to unity:
+    the steady state is a thermodynamic equilibrium. (b) Open system:
+    some ratios tend to a non-unity value: the steady state is a not a
+    thermodynamic equilibrium. }
+  \label{fig:equilibria}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \SubFig{LamKus02-0_P}{Closed system}{0.45}
+  \SubFig{LamKus02-4_P}{Open system}{0.45}
+  \caption{Simulation: energy flows. Three energy flows are plotted:
+    $P_E$ the external energy flow, $P_R$ the energy dissipated in all
+    reactions (including $ATPase$), $P_{ATPase}$ the power consumed by
+    the processes represented by the $ATPase$ reaction. (a) There is
+    no external energy flow or $ATPase$ reaction flow: $P_R$ tends to
+    zero as the energy in the internal species is used up. (b) There
+    is external energy flow and $ATPase$ reaction flow: $P_R$ tends to
+    $P_E$ as the energy in the internal species is used up. In this
+    case, at steady-state about 90\% of the energy is used across
+    processes represented by the $ATPase$ reaction.}
+  \label{fig:Energy}
+\end{figure}
+
+%% REset fig counter to coresp. to paper
+\setcounter{figure}{2}
+\begin{figure}[htbp]
+  \centering
+  \SubFig{LamKus02-0_X}{Closed system}{0.45}
+  \SubFig{LamKus02-4_X}{Open system}{0.45}
+  \caption{[Supplementary Material] Simulated concentrations.  Evolution of the
+    concentrations for $ATP$, $ADP$, $P$, $GLY$ and $LAC$ corresponds
+    to the situation in Figure 2 of Lambeth\&Kushmerick, 2002 except
+    that they use unit initial states. Following an initial transient,
+    the species concentrations reach steady-state values for both the
+    closed and open systems (cf Figure \ref{fig:sim_ABCAo}).}
+  \label{fig:concentrations}
+\end{figure}
+
+
+\begin{figure}[htbp]
+  \centering
+  \SubFig{LamKus02-0_CM}{Closed system}{0.45}
+  \SubFig{LamKus02-4_CM}{Open system}{0.45}
+  \caption{[Supplementary Material] Conserved Moieties. The sum of each conserved moiety
+    remains constant.}
+  \label{fig:moieties}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \SubFig{LamKus02-0_FoutATPase}{Closed system}{0.45}
+  \SubFig{LamKus02-4_FoutATPase}{Open system}{0.45}
+  \caption{[Supplementary Material] Simulated mass flows. Both plots show the input mass flow
+    (though \textbf{SS:GLYo}), the output mass flow (though
+    \textbf{Re:Fout}) and the ATP flux (though \textbf{Re:ATPase}) (a)
+    In the closed system, the flows are zero. (b) In the open system,
+    the three flows reach a constant steady state. The final value of
+    ATP flow is 5.9mM/min; this is close to to value of 6.1mM/min
+    quoted in the ``Moderate exercise'' column of Table 4] of of
+    Lambeth\&Kushmerick, 2002}
+  \label{fig:mass}
+\end{figure}
+
+
+\end{document}
+
+%%% Local Variables:
+%%% End:

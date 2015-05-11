@@ -1,0 +1,42 @@
+#! /bin/bash
+
+##syss="ABCA ABCAo ABCAv ABCAoC ABCAok ABCADM"
+syss="ABCA ABCAo ABCAv ABCAoC"
+
+for sys in $syss; do
+    echo Doing $sys
+## Latex & eps stuff
+    mtt -q -nas  ${sys} abg eps
+    #mtt -q -nas  ${sys} cbg eps
+    mv -v ${sys}*eps Figs
+
+    # mtt -q -nas  ${sys} ode view
+    # sed 's/[uy]_/v_/g'  < ${sys}_ode.tex | sed 's/x_/X_/g' > Tex/${sys}_ode.tex
+    
+## Stoichiometric stuff
+    reps="dm numpar sympar struc"
+    for rep in $reps; do
+    	echo Doing $rep
+    	mtt -q -nas  $sys $rep m
+	if [ "$sys" != "ABCAoC" ]; then
+    	    mtt -q -nas  i$sys $rep m
+	fi
+    done
+
+    # mtt -q -nas   i$sys cbg eps 
+    # mv -v i${sys}*eps Figs
+    
+## Simulation
+    reps="input odeo"
+    for rep in $reps; do
+    	echo Doing $rep
+    	mtt -q -nas  $sys $rep m
+    done			
+done
+
+## Figures.
+octave -q Figures.m
+
+## Copy
+cp -v Figs/*eps ../Figs
+

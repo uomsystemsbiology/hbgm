@@ -1,0 +1,42 @@
+#!/bin/bash
+## Script for creating and running simulations for the paper.
+## The Simple examples are in ABCA
+## The Lambeth & Kushmerick (2002) example is in LamKus02
+## Figures appear in ABCA/Figs and LamKus02/Figs
+## LaTeX  appears in  ABCA/Tex and LamKus02/Tex
+
+## Set up the paths
+echo "############################"
+echo " Setting paths "
+echo "############################"
+source $PWD/mtt/bin/mttrc $PWD/mtt		# Bond graph
+export PATH=$PATH:$PWD/lib/bash:$PWD/lib/python:$PWD/lib/octave # Other tools
+
+## Check MTT components
+echo "############################"
+echo " Checking MTT components "
+mtt --versions
+echo "############################"
+
+## Set up some subdirs + add basic figs.
+mkdir -pv Figs; mkdir -pv Tex
+cp -v Open_abg.eps glycolysis_pathway.eps Figs
+
+dirs="ABCA LamKus02"
+
+for dir in $dirs; do
+    echo "############################"
+    echo "Doing example $dir"
+    echo "Figures in $dir/Figs"
+    echo "LaTeX in $dir/Tex"
+    echo "############################"
+    (cd $dir; mkdir -pv Figs; mkdir -pv Tex; source Make)
+done
+
+echo "############################"
+echo "Creating document"
+echo "############################"
+(cd Figs; Epspdf)
+pdflatex paper_notext
+pdflatex paper_notext
+
