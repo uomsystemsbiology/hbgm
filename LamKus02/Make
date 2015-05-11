@@ -1,0 +1,52 @@
+#! /bin/bash
+
+##syss="GLY PG LAC ATPetc LamKus02"
+##syss="GLY2FBP FBP2GAP GAP2LAC ATPetc LamKus02"
+syss="GLY2FBP FBP2GAP GAP2LAC CrAMP GLY2LAC LamKus02"
+##syss="LamKus02"
+for sys in $syss; do
+    echo Doing $sys
+## Eps stuff
+    mtt -q  ${sys} abg eps
+    mv -v ${sys}*eps Figs
+    
+## Stoichiometric stuff
+    reps="dm numpar sympar struc"
+    for rep in $reps; do
+    	echo Doing $rep
+    	mtt -q  $sys $rep m
+    done
+
+    # mtt -q   i$sys cbg eps 
+    # mv -v i${sys}*eps Figs
+    
+    ## Simulation
+    reps="input odeo"
+    for rep in $reps; do
+    	echo Doing $rep
+    	mtt -q  $sys $rep m
+    done			
+done
+
+
+## Other abg figs
+mtt -q GP  abg eps
+mtt -q Rea  abg eps
+mv -v *abg.eps Figs
+# ## Figures.
+#octave -q Figures.m
+
+## LamKus02 fig 1
+##cp -v FIGS/LamKus02_fig1.eps Figs
+
+## Latex stuff
+sys="LamKus02"
+mtt -q  ${sys} dae tex
+(cd MTT_work; cp -vf Setpath_1.m Setpath.m; dae_edit ${sys}_dae.tex; mv ${sys}_dae.tex ../Tex)
+
+## Simulate.
+octave -q Figures.m
+
+## Copy
+cp -v Figs/*eps ../Figs
+cp -v Tex/*tex ../Tex

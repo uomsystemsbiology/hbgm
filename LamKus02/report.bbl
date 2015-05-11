@@ -1,0 +1,16 @@
+\begin{thebibliography}{1}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Lambeth and Kushmerick(2002)]{LamKus02}
+Melissa~J. Lambeth and Martin~J. Kushmerick.
+\newblock A computational model for glycogenolysis in skeletal muscle.
+\newblock \emph{Annals of Biomedical Engineering}, 30\penalty0 (6):\penalty0
+  808--827, 2002.
+\newblock ISSN 0090-6964.
+\newblock \doi{10.1114/1.1492813}.
+
+\end{thebibliography}

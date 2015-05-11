@@ -1,0 +1,19 @@
+#!/bin/bash
+syss=$1
+reps="dm numpar sympar struc input odeo"
+ireps="dm sympar struc"
+
+for sys in $syss; do
+    echo Doing $sys
+    for rep in $reps; do
+    	echo Doing $rep
+    	mtt -q -nas  $sys $rep m
+    done
+    if [ -e i${sys}_abg.fig ]; then
+	echo Doing i$sys
+	for rep in $ireps; do
+    	    echo Doing $rep
+    	    mtt -q -nas  i$sys $rep m
+        done
+    fi
+done

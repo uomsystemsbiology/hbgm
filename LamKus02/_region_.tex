@@ -1,0 +1,398 @@
+\message{ !name(LamKus02_report.tex)}\documentclass[12pt,a4paper]{article}
+\title{Bond Graph Model of Glycogenolysis \citep{LamKus02}}
+\author{Peter Gawthrop}
+%Maths
+\usepackage{amsmath,amssymb,amsbsy,amscd,amstext,mathtools,amsxtra}
+%%Citations
+\usepackage[authoryear,round,sort,longnamesfirst]{natbib}
+%%\usepackage[authoryear,round,sort]{natbib}
+%%\usepackage[numbers,compress]{natbib}
+ \bibliographystyle{unsrtnat}
+%%\bibliographystyle{plainnat}
+
+%Chemistry
+\newcommand{\reacul}[2]{{\; \xrightleftharpoons[#2]{#1} \;}}
+\newcommand{\reacu}[1]{\reacul{#1}{}}
+\newcommand{\reac}{\reacu{}}
+
+% Figs
+\usepackage{graphicx,subfigure,fancybox,color}
+
+\newcommand{\Fig}[2]{
+ \includegraphics[width=#2\linewidth]{Figs/#1.pdf}
+}
+
+\newcommand{\SubFig}[3]{
+ \subfigure[#2]{
+   \includegraphics[width=#3\linewidth]{Figs/#1.pdf}
+   \label{subfig:#1}
+ }
+}
+
+\newcommand{\FIG}[2]{
+  \SubFig{LamKus02-#1_ATP}{ATP,ADP,P}{0.45}
+  \SubFig{LamKus02-#1_GLY}{GLYf,GLYb,LAC}{0.45}
+  \SubFig{LamKus02-#1_Xeq}{$X_{eq}/K_{eq}$}{0.45}
+  \SubFig{LamKus02-#1_CM}{Normalised conserved moieties}{0.45}
+  \SubFig{LamKus02-#1_extFlow}{External flows}{0.45}
+  \SubFig{LamKus02-#1_FoutATPase}{$v_{Fout}$,$v_{ATPase}$}{0.45}
+  \caption{Simulation: Mode #1. #2}
+  \label{fig:sim_LamKus02-#1}
+}
+\usepackage{endfloat}
+\usepackage[pagebackref]{hyperref}
+\hypersetup{colorlinks=true,citecolor=blue,linkcolor=blue,urlcolor=blue}
+\usepackage{url,doi}
+
+
+\begin{document}
+
+\message{ !name(LamKus02_report.tex) !offset(-3) }
+
+\maketitle
+\tableofcontents
+\section{Introduction}
+\label{sec:introduction}
+\begin{figure}[htbp]
+  \centering
+  \Fig{LamKus02_fig1}{0.8}
+  \caption{\citet[Figure 1]{LamKus02}}
+  \label{fig:LamKus02}
+\end{figure}
+One purpose of this paper is to introduce Systems Biologists to the
+bond graph modelling approach. To this end, a standard metabolic
+pathway from the literature is re-implemented and reexamined from the
+bond graph point of view.
+
+\citet{LamKus02} consider the glycolytic pathway of Figure \ref{fig:LamKus02} and
+provide a detailed thermodynamically consistent model. This model has
+been further embellished by  \citet{VinRusPal10} who also provide a
+detailed comparison with experimental data. \citet[Chapter 7]{Bea12}
+uses this model as an exemplar of the simulation of complex
+biochemical cellular systems. \citet{MosAlfMaj12} have used a similar
+model to examine the interaction of the AKT pathway on metabolism.
+
+
+\section{Bond graph model}
+\label{sec:bond-graph-model}
+\begin{figure}
+  \centering
+  \Fig{LamKus02_abg}{0.8}
+  \caption{Bond graph model}
+  \label{fig:bg}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \Fig{GLY2LAC_abg}{0.6}
+  \caption{FBP2GAP: $3ADP+3P+GLYf \reac 3ATP+2LAC+GLYr$}
+  \label{fig:bg_submodel_1}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \Fig{CrAMP_abg}{0.6}
+  \caption{CrAMP: $AMP+2ATP+Cr \reac  3ADP+PCr$}
+  \label{fig:bg_submodel_2}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \SubFig{GLY2FBP_abg}{GLY2FBP: $ATP+P+GLYf \reac ADP+FBP+GLYr$}{0.9}
+  \SubFig{GAP2LAC_abg}{GAP2LAC: $2ADP+P+GAP \reac 2ATP+LAC$}{0.9}
+  \SubFig{FBP2GAP_abg}{FBP2GAP: $FBP \reac 2GAP$}{0.6}
+  \caption{Bond-graph submodels}
+  \label{fig:bg_submodel_3}
+\end{figure}
+
+\citet{LamKus02} present ``A Computational Model for Glycogenolysis
+in Skeletal Muscle'' based on the schematic reaction diagram of Figure
+\ref{fig:LamKus02}. As a first step in creating a hierarchical model,
+the reaction diagram is divided, in terms of function into three conceptual parts:
+\begin{enumerate}
+\item The reaction chain leading from glycogen ($GLY$) to lactate
+  $LAC$. The function of this part is to convert adenosine diphosphate $ADP$ and
+  inorganic phosphate $P$ into $ATP$ making use of the energy stored
+  in glycogen.
+\item The pair of reactions catalysed by creatine kinase $CK$ and
+  creatine kinase $ADK$ involving creatin ($Cr$), phosphocreatine
+  ($PCr$) and adenosine monophosphate ($AMP$) as well as $ATP$ and
+  $ADP$. The function of this part is to act as buffer storage of
+  $ATP$.
+\item The reaction catalysed by ATPases ($ATPase$) converting $ATP$
+  into $ADP$ and $P$ and releasing the stored energy to perform (in this
+  case) mechanical work.
+\end{enumerate}
+Figure \ref{fig:bg} gives a bond-graph representation of this
+top-level decomposition were the three parts are the compound bong
+graph systems labeled \textbf{GLY2LAC}, \textbf{CrAMP} and 
+
+
+
+\subsection{Reactions}
+\begin{align}
+  \input{BG_reac}
+\end{align}
+% \subsection{ODEs}
+% \begin{align}
+%   \input{BG_ode}
+% \end{align}
+
+% \subsection{Flows}
+% \begin{align}
+%   \input{BG_flow}
+% \end{align}
+
+\subsection{Subsystem stoichiometry}
+
+\begin{xalignat}{2}
+  \label{eq:sub_stoich}
+  GLY2FBP&: & ATP+P+GLYf &\reac ADP+FBP+GLYr \\
+  FBP2GAP&: & FBP &\reac 2GAP \\
+  GAP2LAC&: & 2ADP+P+GAP &\reac 2ATP+LAC \\
+  GLY2LAC&: & 3ADP+3P+GLYf &\reac 3ATP+2LAC+GLYr \\
+  ATPase&: & ATP &\reac  ADP+P  \\
+  CrAMP&: & AMP+2ATP+Cr &\reac  3ADP+PCr 
+\end{xalignat}
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{|l|l|}
+    \hline
+    Composite reaction&$K_{eq}$\\
+    \hline
+    GLY2FBP & 760.17\\
+    FBP2GAP & 4.940\text{e-6}\\
+    GAP2LAC &  7.482\text{e10}\\
+    GLY2LAC & 2.102\text{e+19} \\
+    CrAMP & 514.9 \\
+    ATPase & 2.497\text{e+5} \\
+    \hline
+  \end{tabular}
+  \caption{Equilibrium constants}
+  \label{tab:K_eq}
+\end{table}
+
+\subsection{Stoichiometric analysis}
+\begin{verbatim}
+Conserved Moieties (bg0)
+(1)	ADP AMP ATP 
+(2)	Cr PCr 
+(3)	NAD NADH 
+(4)	DPG NAD P2G P3G PEP PYR 
+(5)	ADP 2*ATP P PCr DHAP 2*FBP GAP 2*DPG P2G P3G PEP F6P G1P G6P 
+Pathways (bg)
+GPa GPb 
+\end{verbatim}
+\begin{itemize}
+\item 
+  CM 1--3 are obvious from the equations.
+\item CM (4)
+  corresponds to the ``total oxidised'' part of
+  \citep[Eqn. (3)]{LamKus02}.
+\item CM (5) corresponds to
+  \citep[Eqn. (2)]{LamKus02} of which they say ``Correct conservation of
+  mass within the model was proven for both open and closed systems by
+  calculating the total phosphate using the following equation''.
+\item 
+  Should there be a CM corresponding to the ``total reduced'' part of
+  \citep[Eqn. (3)]{LamKus02} (NADH+GAP+LAC)?
+\end{itemize}
+The pathway corresponds to the two parallel GP reactions which must
+therefore have the same $K_{eq}$. The SBML version collapses these two
+reactions in one thus avoiding the issue. \citet{MosAlfMaj12} get this
+wrong as follows:
+
+The two reactions labelled \textbf{GPa} and \textbf{GPb} are both of
+the form:
+\begin{equation}
+  \label{eq:GP}
+  GLY + Pi \reac GLY + G1P
+\end{equation}
+Both reactions must therefore have the same equilibrium constant
+\begin{equation}\label{eq:Keqb}
+  K_{eqb} = K_{eqa}
+\end{equation}
+Indeed, \citet[Table 1]{LamKus02} have  $K_{eqa} = K_{eqb} = 0.42$.
+
+Although, on p. 17, \citet{MosAlfMaj12} correctly use this value for
+$K_{eqa}$, the value on p. 18 incorrectly gives $K_{eqb} = 16.62$
+thus \eqref{eq:Keqb} is violated and the model is not
+thermodynamically consistent. A glance at \citep[Table 1]{LamKus02}
+reveals that  \citet{MosAlfMaj12} have used the equilibrium constant
+for Phosphoglucomutase instead of that for Glycogen Phosphorylase B.
+
+\subsection{Simulations}
+\label{sec:sim}
+
+\begin{figure}
+  \centering
+  \FIG{0}{Closed system. ATPase off, Fout off.}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \FIG{1}{Open system. ATPase off, Fout on. GLY free.}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \FIG{2}{Open system. ATPase off, Fout on. GLY fixed.}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \FIG{3}{Open system. ATPase on, Fout on. GLY free.}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \FIG{4}{Open system. ATPase on, Fout on. GLY fixed.}
+\end{figure}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{|l|l|}
+    \hline
+    ATPase coefficient & 0.75\\
+    \hline
+    ATP flux & 6.0318 mM/min\\
+    ATP  & 8.04245 mM\\
+    ADP  & 0.168962 mM \\
+    AMP  & 0.00160618 mM \\
+    Pi  & 0.00253925 mM \\
+    PCr  & 39.9964 mM \\
+    \hline
+  \end{tabular}
+  \caption{Moderate Exercise}
+  \label{tab:ME}
+\end{table}
+Figures \ref{fig:sim_LamKus02-0}--~\ref{fig:sim_LamKus02-4} contain 6 subplots:
+\begin{enumerate}
+\item A plot of the concentrations of $ATP$, $ADP$ and $P$  together with
+  the quantity $K_{eqcombo}$ (scaled by $10^{-19}$) from Equation (5)
+  of \citet{LamKus02}. This is similar to Figure 2 of \citet{LamKus02}.
+\item The concentration of the two types of glycogen: $GLY_f$ and
+  $GLY_r$ and $LAC$.
+\item For each reaction, except $Fout$ and $ATPase$, the quantity
+  $\rho_{eq} = X_{eq}/K_{eq}$ where $K_{eq}$
+  is the equilibrium constant and $X_{eq} = \exp(N^T \ln X)$ where $N$
+  is the stoichimetric matrix. Thus for reaction $ENO$, $X_{eq} =
+  \dfrac{X_{PG}}{X_{PEP}}$. At equillibrium, $\rho_{eq}=1$.
+\item The normalised conserved moities $\dfrac{1}{GX_0}GX$: this
+  should always be unity (sanity check).
+\item The internal flows $V_{Fout}$ and $V_{ATPase}$.
+\item For each fixed concentration, the external flow required to keep
+  the concentration constant. 
+\end{enumerate}
+
+The parameters were taken from \citet[Table 3]{LamKus02} with the
+exception of $K_{eq}$ for $TPI$ which appears to be inverted (probably
+because the reaction is specified in the ``wrong'' direction. This is
+verified by the value given by \citet[Table 9.1]{Bea12}.
+
+In each case, the initial conditions corresponded to \citet[Table
+3]{LamKus02} together with the two equations gleaned from page 813:
+\begin{align}
+  \frac{X_{NAD}}{X_{NADH}} &= 1000\\
+  X_{Cr} + X_{PCr} &= 40\text{mM}
+\end{align}
+
+
+The following 5 conditions are simulated and shown in Figures
+\ref{fig:sim_LamKus02-0}--~\ref{fig:sim_LamKus02-4}:
+
+  \paragraph{Mode 0: Closed system. ATPase off, Fout off.}
+  This corresponds to the situation in \citet[Figure 2]{LamKus02}
+  except that they use unit initial states. They introduce
+  $K_{eqcombo}$ (there equation 5) as the effective equilibrium constant of
+  \textbf{GLY2LAC}. They quote a value of $1.5e19$; our parameters
+  give $2.1023e19$ (with the modified $K_{eq}$ for TPI). As in their
+  Figure 2, this is plotted (scaled by $1e19$) in Figure \ref{fig:sim_LamKus02-0}.
+ 
+
+  \paragraph{Mode 1: Open system. ATPase off, Fout on. GLY free.}
+  LAC drains away and is not replenished.
+  \paragraph{Mode 2: Open system. ATPase off, Fout on. GLY fixed.}
+  GLYf and GLYr are fixed and the corresponding flows appear in
+  subfigure(d). This make little difference to the behaviour in mode 1.
+  \paragraph{Mode 3: Open system. ATPase on, Fout on. GLY free.}
+  The system reaches a non-equilibrium steady state approximating the
+  ``Moderate Exercise'' condition of \citet[Table 4]{LamKus02} -- see
+  Table \ref{tab:ME}. In particular, the ATPase flow is about 6mM/min.
+  \paragraph{Mode 4: Open system. ATPase on, Fout on. GLY fixed.}
+  GLYf and GLYr are fixed and the corresponding flows appear in
+  subfigure(d). This make little difference to behaviour in mode 3.
+\appendix
+\section{Errors and discrepancies in \citet{LamKus02}}
+\label{sec:errors-citelamkus02}
+
+\subsection{Glycogen Phosphorylase}
+There are a number of apparent issues with the pair of reactions $GPa$
+and $GPb$.
+\begin{itemize}
+\item The $GLY$ appears on both sides of the rate equation. This would
+  imply that the rate of change of the concentration $GLY$ is
+  zero. But the paper states that ``GLY' = - flux\_GP''. There is an
+  argument about this which I don't follow. However, the paper seems
+  to set $GLY$ to be a constant so maybe this does not matter.
+\item I'm confused about the difference between GPa and the first
+  factor of GPb. In particular, the factors multiplying V\_maxf and
+  V\_maxr in the numerator also appear identically in the
+  denominator. This is true for GPb but not GPa.
+  On second thoughts, perhaps the Vmax terms can be adjusted accordingly.
+\end{itemize}
+
+\subsection{TPI}
+\label{sec:TPI}
+The equilibrium constant is given as $K_{eq} =  0.052$. However this
+gives the wrong value of $K_{eqcombo}$. Because the reaction is
+specified in the ``wrong'' direction, it is assumed that $K_{eq}$
+should be the reciprocal of the given value, ie $K_{eq} = 19.23$.
+\citet{Bea12} quotes $K_{eq} = 19.87$; so this alteration seems to be
+correct.
+
+
+
+\subsection{Typographical errors}
+\begin{itemize}
+\item In \citet[Figure 1]{LamKus02}
+  \begin{itemize}
+  \item Reaction $PGK$ ATP and ADP are reversed
+  \item Reaction $PK$ ATP and ADP are reversed
+  \end{itemize}
+\end{itemize}
+
+\subsection{Discrepancies in SBML version}
+\label{sec:discr-sbml-vers}
+The biomodels repository \url{http://www.ebi.ac.uk/biomodels-main/}
+contains an SBML version (MODEL6623617994)
+\url{http://www.ebi.ac.uk/biomodels-main/MODEL6623617994} of the model
+of \citet{LamKus02}. There are a number of discrepancies:
+\begin{itemize}
+\item Reaction $FBP$ is renamed as $FDP$
+\item There is an extra reaction $fout$ and corresponding state
+  $LACo$. This presumably corresponds to the ``lactate efflux''
+  referred to in the paper. This has been added to the BG model as
+  part of \textbf{GAP2LAC}.
+\item The parameters are different.
+\end{itemize}
+
+\section{Comparison of BG and SBML}
+With the following changes the stoichiometric matrices are identical:
+\begin{enumerate}
+\item (BG) The two states $GLYf$ and $GLYr$ are removed.
+\item (BG) The two reactions $GPa$ and $GPb$ are collapsed into one and
+  renamed $GP$.
+\item (SBML) The states and reactions are reordered to correspond to
+  the ordering of the BG model.
+\end{enumerate}
+
+\bibliography{common}
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
+
+\message{ !name(LamKus02_report.tex) !offset(-398) }
